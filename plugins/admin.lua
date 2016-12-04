@@ -1,4 +1,4 @@
-local function set_bot_photo(msg, success, result)
+local function set_bot_(msg, success, result)
   local receiver = get_receiver(msg)
   if success then
     local file = 'data/photos/bot.jpg'
@@ -134,22 +134,22 @@ local function run(msg,matches)
     	end
     	return
     end
-    if matches[1] == "pm" then
+    if matches[1] == "پیام" then
     	send_large_msg("user#id"..matches[2],matches[3])
     	return "Msg sent"
     end
-    if matches[1] == "block" then
+    if matches[1] == "بلاک" then
     	if is_admin2(matches[2]) then
     		return "You can't block admins"
     	end
     	block_user("user#id"..matches[2],ok_cb,false)
     	return "User blocked"
     end
-    if matches[1] == "unblock" then
+    if matches[1] == "انبلاک" then
     	unblock_user("user#id"..matches[2],ok_cb,false)
     	return "User unblocked"
     end
-    if matches[1] == "import" then--join by group link
+    if matches[1] == "ایمپورت" then--join by group link
     	local hash = parsed_url(matches[2])
     	import_chat_link(hash,ok_cb,false)
     end
@@ -188,14 +188,14 @@ local function run(msg,matches)
 end
 return {
   patterns = {
-	"^[!/](pm) (%d+) (.*)$",
-	"^[!/](import) (.*)$",
-	"^[!/](unblock) (%d+)$",
-	"^[!/](block) (%d+)$",
+	"^(پیام) (%d+) (.*)$",
+	"^(ایمپورت) (.*)$",
+	"^(انبلاک) (%d+)$",
+	"^(بلاک) (%d+)$",
 	"^[!/](markread) (on)$",
 	"^[!/](markread) (off)$",
 	"^[!/](setbotphoto)$",
-	"%[(photo)%]",
+	"%[(عکس)%]",
 	"^[!/](contactlist)$",
 	"^[!/](dialoglist)$",
 	"^[!/](delcontact) (%d+)$",
@@ -205,5 +205,3 @@ return {
   },
   run = run,
 }
---By @imandaneshi :)
---https://github.com/SEEDTEAM/TeleSeed/blob/master/plugins/admin.lua
